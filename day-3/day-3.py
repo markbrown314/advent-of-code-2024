@@ -2,8 +2,10 @@ from packages.support import *
 from packages.ply import lex
 from packages.ply import yacc
 
-tokens = ('MUL', 'LPAREN', 'RPAREN', 'NUMBER', 'SEPERATOR')
+tokens = ('MUL', 'LPAREN', 'RPAREN', 'NUMBER', 'SEPERATOR','DO', 'DONT')
 t_MUL = 'mul'
+t_DO = 'do'
+t_DONT = 'don\'t'
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
 t_SEPERATOR = r','
@@ -22,9 +24,17 @@ def t_error(t):
 def p_error(p):
     pass
 
-def p_mul_expression(p):
+def p_expression_mul(p):
     'expression : MUL LPAREN NUMBER SEPERATOR NUMBER RPAREN'
     p[0] = p[3] * p[5]
+
+def p_statement_do(p):
+    'expression : DO LPAREN RPAREN'
+    p[0] = 'do'
+
+def p_statement_dont(p):
+    'expression : DONT LPAREN RPAREN'
+    p[0] = 'dont'
 
 test = load_string("input.txt")
 lexer = lex.lex()
@@ -41,8 +51,15 @@ while True:
     if not tok: 
         break      # No more input
     #print(tok.type, tok.value, tok.lineno, tok.lexpos)
-    if tok.type == 'MUL' and record == False:
+    if tok.type == 'DO':
         record = True
+        s = ''
+    elif tok.type == 'DONT':
+        record = True
+        s = ''
+    elif tok.type == 'MUL':
+        record = True
+        s = ''
     elif tok.type == 'ERROR':
         record = False
         s = ''
@@ -55,11 +72,16 @@ while True:
     
     if record:
         s = s + str(tok.value)
-
+print(c)
 t = 0
+enable = True
 for exp in c:
     v = parser.parse(exp)
-    if v:
+    if v and isinstance(v, int) and enable:
         t += v
+    elif isinstance(v, str) and v == "do":
+        enable = True
+    elif isinstance(v, str) and v == "dont":
+        enable = False
 
 print(t)
