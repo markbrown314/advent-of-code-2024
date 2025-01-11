@@ -1,40 +1,49 @@
-def solution():
-    f = open("input-test.txt")
+def solution(correctly_ordered = True):
+    f = open("input.txt")
     data = f.readlines()
     page_rule = []
-    page_set = set()
     page_dict = dict()
     updates = []
 
     for l in data:
         if "|" in l:
             page_rule.append(tuple(int(x) for x in l.split("|")))
-            page_set.update([int(x) for x in l.split("|")])
         if "," in l:
             updates.append([int(x) for x in l.split(",")])
 
-
-    page_dict = {x:i for i,x in enumerate(sorted(page_set))}
-    #print(page_dict)
-    #print(updates)
-
-    for rule in page_rule:
-        pos = [page_dict.get(rule[0]), page_dict.get(rule[1])]
-        print(pos)
-        if pos[0] > pos[1]:
-            print("swap")
-            page_dict[rule[0]] = pos[1]
-            page_dict[rule[1]] = pos[0]
+    for before, after in page_rule:
+        page_dict[before] = page_dict.get(before, []) + [after]
+    print(page_dict)
 
     middle_count = 0
     print(page_dict)
     for update in updates:
-        check = [page_dict.get(x) for x in update]
-        print(check, sorted(check))
-        if check == sorted(check):
-            middle_count += update[int(len(update)/2)]
-            
+        print(update)
+        correct = True
+        if correctly_ordered:
+            for i in range(0, len(update)-1):
+                if not update[i] in page_dict or not update[i+1] in page_dict[update[i]]:
+                    correct = False
+                    break
+            if correct:
+                middle_count += update[int(len(update)/2)]
+        else:
+            update_count = 0
+            while True:
+                correct = True
+                for i in range(0, len(update)-1):
+                    if not update[i] in page_dict or not update[i+1] in page_dict[update[i]]:
+                        update[i], update[i+1] = update[i+1], update[i]
+                        correct = False
+                        update_count += 1
+                if correct:
+                    if update_count > 0:
+                        print("new:", update)
+                        middle_count += update[int(len(update)/2)]
+                    break
+
     print(middle_count)
         
 if __name__ == "__main__":
-    solution()
+    solution(True)
+    solution(False)
