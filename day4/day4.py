@@ -1,17 +1,15 @@
 import itertools
 
-def solution():
+def solution(cross=False, filename = "input.txt"):
 
     def get_words(s, cl, dl):
         wl = []
         for c in cl:
-            print("check", (c[0],c[1]), dl)
             w = ''
             for d in dl:
                 x = c[0] + d[0]
                 y = c[1] + d[1]
                 w += s.get((x,y), '')
-                print((x,y), w)
                 if w:
                     wl.append(w)
         return wl
@@ -19,16 +17,8 @@ def solution():
     s = dict()
     s_r = dict()
 
-    with open("input.txt") as f:
+    with open(filename) as f:
         t_in = f.read()
-    """
-    t_in = "..X...\n" \
-           ".SAMX.\n" \
-           ".A..A.\n" \
-           "XMAS.S\n" \
-           ".X....\n"
-    print(t_in)
-    """
     x = 0
     y = 0
     ml = [[(0,0),(1,0),(2,0),(3,0)],
@@ -50,23 +40,25 @@ def solution():
         elif c == '.':
             pass 
         else:
-            print((x,y), c)
             s.update({(x,y):c})
             s_r[c] = s_r.get(c, []) + [(x,y)]
         x += 1
     
-    wl = []
-    print("X locs:", s_r['X'])
-    for dl in ml:
-        wl += get_words(s, s_r['X'], dl)
-    print(wl.count("XMAS"))
+    
+    if not cross:
+        wl = []
+        for dl in ml:
+            wl += get_words(s, s_r['X'], dl)
 
-    wl = []
-    print("M locs:", s_r['M'])
-    wl += get_words(s, s_r['M'], mlb)
-    wl += get_words(s, s_r['S'], mlb)
+        return wl.count("XMAS")
+    
+    else:
+        wl = []
+        wl += get_words(s, s_r['M'], mlb)
+        wl += get_words(s, s_r['S'], mlb)
 
-    print(wl.count("MASMAS")+wl.count("SAMMAS")+wl.count("SAMSAM")+wl.count("MASSAM"))
+        return wl.count("MASMAS")+wl.count("SAMMAS")+wl.count("SAMSAM")+wl.count("MASSAM")
 
 if __name__ == "__main__":
-    solution()
+    print("Part 1", solution(False, "input.txt"))
+    print("Part 2", solution(True, "input.txt"))
