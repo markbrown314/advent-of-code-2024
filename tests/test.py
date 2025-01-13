@@ -1,8 +1,5 @@
 import unittest
-import day3.day3 as day3
-import day4.day4 as day4
-import day5.day5 as day5
-import day6.day6 as day6
+import day3, day4, day5, day6, day7
 
 class TestAoC(unittest.TestCase):
     def test_day3_part1(self):
@@ -36,6 +33,15 @@ class TestAoC(unittest.TestCase):
     def test_day6_part2(self):
         r = day6.solution(True, "day6/input-test.txt")
         self.assertEqual(r, 6, "result is incorrect")
+
+    def test_day7_part1(self):
+        r = day7.solution(False, "day7/input-test.txt")
+        self.assertEqual(r, 3749, "result is incorrect")
+
+    def test_day7_part2(self):
+        r = day7.solution(True, "day7/input-test.txt")
+        self.assertEqual(r, 11387, "result is incorrect")
+
 
 if __name__ == '__main__':
     unittest.main()
