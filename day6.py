@@ -1,8 +1,9 @@
 import re
 from packages.support import GridRangeFile
-
-def solution(detect_loop = False, filename = "input-test.txt"):
-
+"""
+🎅🏻 Day 6: Guard Gallivant
+"""
+def solution(detect_loop = False, filename = "inputs/day6-input.txt"):
     space = set()
     past_pos = set()
     loop = set()
@@ -76,5 +77,5 @@ def solution(detect_loop = False, filename = "input-test.txt"):
                 continue
 
 if __name__ == "__main__":
-    print("Part 1", solution(False,"input.txt"))
-    print("Part 2", solution(True, "input.txt"))
+    print("Part 1:", solution(False))
+    print("Part 2:", solution(True))

@@ -1,7 +1,8 @@
 import itertools
-
-def solution(cross=False, filename = "input.txt"):
-
+"""
+🎅🏻 Day 4: Ceres Search
+"""
+def solution(cross=False, filename = "inputs/day4-input.txt"):
     def get_words(s, cl, dl):
         wl = []
         for c in cl:
@@ -60,5 +61,5 @@ def solution(cross=False, filename = "input.txt"):
         return wl.count("MASMAS")+wl.count("SAMMAS")+wl.count("SAMSAM")+wl.count("MASSAM")
 
 if __name__ == "__main__":
-    print("Part 1", solution(False, "input.txt"))
-    print("Part 2", solution(True, "input.txt"))
+    print("Part 1:", solution(False))
+    print("Part 2:", solution(True))

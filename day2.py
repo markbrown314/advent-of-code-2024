@@ -1,10 +1,10 @@
 """
 🎅🏻 Day 2: Red-Nosed Reports
 """
-def solution_day2(dampner = False):
+def solution(dampner = False, filename = "inputs/day2-input.txt"):
     safe_cnt = 0
     
-    with open("input.txt") as f:
+    with open(filename) as f:
         for line in f:
             attempts = []
             attempts.append(line.split())
@@ -43,5 +43,5 @@ def solution_day2(dampner = False):
         return safe_cnt
 
 if __name__ == "__main__":
-    print(solution_day2(False))
-    print(solution_day2(True))
+    print("Part 1:", solution(False))
+    print("Part 2:", solution(True))

@@ -4,7 +4,7 @@ from packages.ply import yacc
 """
 🎅🏻 Day 3: Mull It Over
 """
-def solution(conditional = False, input_file='input.txt'):
+def solution(conditional = False, filename = 'inputs/day3-input.txt'):
     tokens = ('MUL', 'LPAREN', 'RPAREN', 'NUMBER', 'SEPERATOR','DO', 'DONT')
     t_MUL = 'mul'
     t_DO = 'do'
@@ -39,7 +39,7 @@ def solution(conditional = False, input_file='input.txt'):
         'statement : DONT LPAREN RPAREN'
         p[0] = 'dont'
 
-    test = load_string(input_file)
+    test = load_string(filename)
     lexer = lex.lex()
     lexer.input(test)
 
@@ -93,5 +93,5 @@ def solution(conditional = False, input_file='input.txt'):
     return t
 
 if __name__ == "__main__":
-    print(solution(False))
-    print(solution(True))
+    print("Part 1:", solution(False))
+    print("Part 2:", solution(True))

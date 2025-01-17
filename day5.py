@@ -1,4 +1,7 @@
-def solution(report_correct = True, file_name = "input.txt"):
+"""
+🎅🏻 Day 5: Print Queue
+"""
+def solution(report_correct = True, file_name = "inputs/day5-input.txt"):
     page_rule = []
     page_dict = dict()
     updates = []
@@ -37,5 +40,5 @@ def solution(report_correct = True, file_name = "input.txt"):
     return middle_count
         
 if __name__ == "__main__":
-    print("part 1:", solution(True))
-    print("part 2:", solution(False))
+    print("Part 1:", solution(True))
+    print("Part 2:", solution(False))

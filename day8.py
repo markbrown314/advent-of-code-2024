@@ -1,7 +1,9 @@
 from packages.support import GridRangeFile
 import itertools as it
-
-def solution(inline: bool, filename: str = "input.txt") -> int:
+"""
+🎅🏻 Day 8: Resonant Collinearity
+"""
+def solution(inline: bool, filename: str = "inputs/day8-input.txt") -> int:
     def delta(a, b):
         return (a[0] - b[0], a[1] - b[1])
     
@@ -39,5 +41,5 @@ def solution(inline: bool, filename: str = "input.txt") -> int:
     return len(cdict)
 
 if __name__ == "__main__":
-    print("Part 1", solution(False))
-    print("Part 2", solution(True))
+    print("Part 1:", solution(False))
+    print("Part 2:", solution(True))

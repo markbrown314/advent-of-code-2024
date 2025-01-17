@@ -1,5 +1,8 @@
 import itertools
-def solution(concat=False, filename = "input-test.txt"):
+"""
+🎅🏻 Day 7: Bridge Repair
+"""
+def solution(concat=False, filename = "inputs/day7-input.txt"):
     with open(filename) as f:
         lines = f.read().strip().split('\n')
 
@@ -44,5 +47,5 @@ def solution(concat=False, filename = "input-test.txt"):
     return total
 
 if __name__ == "__main__":
-    print("Part 1", solution(False, "input.txt"))
-    print("Part 2", solution(True, "input.txt"))
+    print("Part 1:", solution(False))
+    print("Part 2:", solution(True))
