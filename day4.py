@@ -2,7 +2,7 @@ import itertools
 """
 🎅🏻 Day 4: Ceres Search
 """
-def solution(cross=False, filename = "inputs/day4-input.txt"):
+def solution(part = 1, filename = "inputs/day4-input.txt"):
     def get_words(s, cl, dl):
         wl = []
         for c in cl:
@@ -46,7 +46,7 @@ def solution(cross=False, filename = "inputs/day4-input.txt"):
         x += 1
     
     
-    if not cross:
+    if part == 1:
         wl = []
         for dl in ml:
             wl += get_words(s, s_r['X'], dl)
@@ -61,5 +61,5 @@ def solution(cross=False, filename = "inputs/day4-input.txt"):
         return wl.count("MASMAS")+wl.count("SAMMAS")+wl.count("SAMSAM")+wl.count("MASSAM")
 
 if __name__ == "__main__":
-    print("Part 1:", solution(False))
-    print("Part 2:", solution(True))
+    print("Part 1:", solution(1))
+    print("Part 2:", solution(2))

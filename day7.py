@@ -2,7 +2,7 @@ import itertools
 """
 🎅🏻 Day 7: Bridge Repair
 """
-def solution(concat=False, filename = "inputs/day7-input.txt"):
+def solution(part = 1, filename = "inputs/day7-input.txt"):
     with open(filename) as f:
         lines = f.read().strip().split('\n')
 
@@ -13,7 +13,7 @@ def solution(concat=False, filename = "inputs/day7-input.txt"):
 
     total = 0
     for t, nums in equation_list:     
-        ops = [*itertools.product(*['*+|' if concat else '*+'], repeat=len(nums)-1)]
+        ops = [*itertools.product(*['*+|' if part == 2 else '*+'], repeat=len(nums)-1)]
         for c in ops:
             e = []
             for x,y in itertools.zip_longest(nums, c, fillvalue=':'):
@@ -47,5 +47,5 @@ def solution(concat=False, filename = "inputs/day7-input.txt"):
     return total
 
 if __name__ == "__main__":
-    print("Part 1:", solution(False))
-    print("Part 2:", solution(True))
+    print("Part 1:", solution(1))
+    print("Part 2:", solution(2))

@@ -3,7 +3,7 @@ from packages.support import GridRangeFile
 """
 🎅🏻 Day 6: Guard Gallivant
 """
-def solution(detect_loop = False, filename = "inputs/day6-input.txt"):
+def solution(part = 1, filename = "inputs/day6-input.txt"):
     space = set()
     past_pos = set()
     loop = set()
@@ -19,12 +19,12 @@ def solution(detect_loop = False, filename = "inputs/day6-input.txt"):
     max_coord = (x,y)
     moves = 0
     loops = 0
-    if detect_loop:
+    if part == 2:
         obs_locations = [(-1,-1)]
         obs_pos = None    
 
     while True:
-        if detect_loop and not obs_pos:
+        if part == 2 and not obs_pos:
             while obs_locations:
                 loop = set()
                 pos = home_pos
@@ -57,7 +57,7 @@ def solution(detect_loop = False, filename = "inputs/day6-input.txt"):
             past_pos.add(pos)
             pos = next_pos
 
-            if detect_loop:
+            if part == 2:
                 if (pos, angle) in loop:
                     loops += 1
                     space.remove(obs_pos)
@@ -67,7 +67,7 @@ def solution(detect_loop = False, filename = "inputs/day6-input.txt"):
                     loop.add((pos, angle))
         
             if pos[0] > max_coord[0] or pos[0] < 0 or pos[1] > max_coord[1] or pos[1] < 0:
-                if not detect_loop:
+                if not part == 2:
                     return moves
                 if run_scan:
                     run_scan = False
@@ -77,5 +77,5 @@ def solution(detect_loop = False, filename = "inputs/day6-input.txt"):
                 continue
 
 if __name__ == "__main__":
-    print("Part 1:", solution(False))
-    print("Part 2:", solution(True))
+    print("Part 1:", solution(1))
+    print("Part 2:", solution(2))

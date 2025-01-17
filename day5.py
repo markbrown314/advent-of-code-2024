@@ -1,11 +1,11 @@
 """
 🎅🏻 Day 5: Print Queue
 """
-def solution(report_correct = True, file_name = "inputs/day5-input.txt"):
+def solution(part = 1, filename = "inputs/day5-input.txt"):
     page_rule = []
     page_dict = dict()
     updates = []
-    with open(file_name) as f:
+    with open(filename) as f:
         data = f.readlines()
         for l in data:
             if "|" in l:
@@ -24,21 +24,21 @@ def solution(report_correct = True, file_name = "inputs/day5-input.txt"):
             for i in range(0, len(update)-1):
                 if not update[i] in page_dict or not update[i+1] in page_dict[update[i]]:
                     correct = False
-                    if report_correct:
+                    if part == 1:
                         break
                     else:
                         update[i], update[i+1] = update[i+1], update[i]
                         fix_count += 1
                     
             if correct:
-                if report_correct or (not report_correct and fix_count > 0):
+                if part == 1 or (part == 2 and fix_count > 0):
                     middle_count += update[int(len(update)/2)]
                 break
-            if report_correct:
+            if part == 1:
                 break
 
     return middle_count
         
 if __name__ == "__main__":
-    print("Part 1:", solution(True))
-    print("Part 2:", solution(False))
+    print("Part 1:", solution(1))
+    print("Part 2:", solution(2))

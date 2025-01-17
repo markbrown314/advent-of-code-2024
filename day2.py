@@ -1,7 +1,7 @@
 """
 🎅🏻 Day 2: Red-Nosed Reports
 """
-def solution(dampner = False, filename = "inputs/day2-input.txt"):
+def solution(part = 1, filename = "inputs/day2-input.txt"):
     safe_cnt = 0
     
     with open(filename) as f:
@@ -9,7 +9,7 @@ def solution(dampner = False, filename = "inputs/day2-input.txt"):
             attempts = []
             attempts.append(line.split())
 
-            if dampner:
+            if part == 2:
                 for n in range(0, len(line.split())):
                     levels = line.split()
                     levels.pop(n)
@@ -43,5 +43,5 @@ def solution(dampner = False, filename = "inputs/day2-input.txt"):
         return safe_cnt
 
 if __name__ == "__main__":
-    print("Part 1:", solution(False))
-    print("Part 2:", solution(True))
+    print("Part 1:", solution(1))
+    print("Part 2:", solution(2))

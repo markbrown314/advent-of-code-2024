@@ -3,7 +3,7 @@ import itertools as it
 """
 🎅🏻 Day 8: Resonant Collinearity
 """
-def solution(inline: bool, filename: str = "inputs/day8-input.txt") -> int:
+def solution(part: int = 1, filename: str = "inputs/day8-input.txt") -> int:
     def delta(a, b):
         return (a[0] - b[0], a[1] - b[1])
     
@@ -20,7 +20,7 @@ def solution(inline: bool, filename: str = "inputs/day8-input.txt") -> int:
 
     for a in antennas:
         for p in it.product((c for c in antennas[a]), repeat = 2):
-            if inline:
+            if part == 2:
                 cdict[p[0]] = a
 
             d = delta(p[0], p[1])
@@ -35,11 +35,11 @@ def solution(inline: bool, filename: str = "inputs/day8-input.txt") -> int:
 
                 p = (an, None)
 
-                if not inline:
+                if part == 1:
                     break
 
     return len(cdict)
 
 if __name__ == "__main__":
-    print("Part 1:", solution(False))
-    print("Part 2:", solution(True))
+    print("Part 1:", solution(1))
+    print("Part 2:", solution(2))

@@ -4,7 +4,7 @@ from packages.ply import yacc
 """
 🎅🏻 Day 3: Mull It Over
 """
-def solution(conditional = False, filename = 'inputs/day3-input.txt'):
+def solution(filename = 'inputs/day3-input.txt'):
     tokens = ('MUL', 'LPAREN', 'RPAREN', 'NUMBER', 'SEPERATOR','DO', 'DONT')
     t_MUL = 'mul'
     t_DO = 'do'
@@ -56,10 +56,10 @@ def solution(conditional = False, filename = 'inputs/day3-input.txt'):
         if not tok: 
             break      # No more input
  
-        if tok.type == 'DO' and conditional:
+        if tok.type == 'DO':
             record = True
             s = ''
-        elif tok.type == 'DONT' and conditional:
+        elif tok.type == 'DONT':
             record = True
             s = ''
         elif tok.type == 'MUL':
@@ -93,5 +93,5 @@ def solution(conditional = False, filename = 'inputs/day3-input.txt'):
     return t
 
 if __name__ == "__main__":
-    print("Part 1:", solution(False))
-    print("Part 2:", solution(True))
+    print("Part 1:", solution())
+    print("Part 2:", solution())
